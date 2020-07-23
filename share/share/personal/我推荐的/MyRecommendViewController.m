@@ -1,57 +1,48 @@
 //
-//  HomeViewController.m
+//  MyRecommendViewController.m
 //  share
 //
-//  Created by 房彤 on 2020/7/21.
+//  Created by 房彤 on 2020/7/23.
 //  Copyright © 2020 房彤. All rights reserved.
 //
 
-#import "HomeViewController.h"
-#import "HomeTableViewCell.h"
-#import "SubViewController.h"
+#import "MyRecommendViewController.h"
+#import "MyRecommentTableViewCell.h"
 
-@interface HomeViewController ()
+@interface MyRecommendViewController ()
 
 @end
 
-@implementation HomeViewController
+@implementation MyRecommendViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //导航栏标题
-    self.navigationItem.title = @"SHARE";
-    //分栏
-    UITabBarItem *tabBarItem = [[UITabBarItem alloc] init];
-    tabBarItem.image = [[UIImage imageNamed:@"home1.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    tabBarItem.selectedImage = [[UIImage imageNamed:@"home2.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    self.tabBarItem = tabBarItem;
+    // Do any additional setup after loading the view.
     
-    //tableView
+     //self.view.backgroundColor = [UIColor redColor];
     self.tableView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStyleGrouped];
-    
-    //设置代理
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
     self.tableView.estimatedSectionHeaderHeight = 10;
-     self.tableView.estimatedSectionFooterHeight = 10;
-    
-    //注册
-    [self.tableView registerClass:[HomeTableViewCell class] forCellReuseIdentifier:@"ft"];
+    self.tableView.estimatedSectionFooterHeight = 10;
     
     [self.view addSubview:self.tableView];
+    [self.tableView registerClass:[MyRecommentTableViewCell class] forCellReuseIdentifier:@"ft"];
     
-
 }
 
-//组数
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 5;
+    return 4;
 }
 
-//行数
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 1;
+}
+
+//单元格高度
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 140;
 }
 
 //尾部高度
@@ -63,30 +54,15 @@
     return 0;
 }
 
-//单元格高度
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if(indexPath.section == 0) {
-        return 200;
-    } else {
-        return 140;
-    }
-}
 
 
-//点击当前cell
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if(indexPath.section == 1) {
-        SubViewController *sub = [[SubViewController alloc] init];
-        [self.navigationController pushViewController:sub animated:YES];
-    }
-}
 
 //单元格内容
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell0 = [[UITableViewCell alloc] init];
     
-    HomeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ft" forIndexPath:indexPath];
-   if(indexPath.section == 1) {
+    MyRecommentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ft" forIndexPath:indexPath];
+   if(indexPath.section == 0) {
     
         cell.photoView.image = [UIImage imageNamed:@"photo1.png"];
         cell.zanView.image = [UIImage imageNamed:@"zan.png"];
@@ -111,7 +87,7 @@
         cell.shareLabel.font = [UIFont systemFontOfSize:13];
     
         return cell;
-   }  else if (indexPath.section == 2) {
+   }  else if (indexPath.section == 1) {
 
         cell.photoView.image = [UIImage imageNamed:@"photo2.png"];
         cell.zanView.image = [UIImage imageNamed:@"zan.png"];
@@ -136,7 +112,7 @@
         cell.shareLabel.font = [UIFont systemFontOfSize:13];
        
         return cell;
-   } else if(indexPath.section == 3) {
+   } else if(indexPath.section == 2) {
         cell.photoView.image = [UIImage imageNamed:@"photo3.png"];
         cell.zanView.image = [UIImage imageNamed:@"zan.png"];
         cell.eyeView.image = [UIImage imageNamed:@"eye.png"];
@@ -160,7 +136,7 @@
         cell.shareLabel.font = [UIFont systemFontOfSize:13];
           
         return cell;
-   } else if(indexPath.section == 4){
+   } else if(indexPath.section == 3){
         cell.photoView.image = [UIImage imageNamed:@"photo4.png"];
         cell.zanView.image = [UIImage imageNamed:@"zan.png"];
         cell.eyeView.image = [UIImage imageNamed:@"eye.png"];
@@ -190,7 +166,6 @@
    }
     
 }
-
 
 
 

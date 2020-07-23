@@ -12,6 +12,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface PassageViewController : UIViewController
 
+@property UITableView *jxTableView;
+@property UITableView *rmTableView;
+@property UITableView *qbTableView;
+@property UIScrollView *scrollView;
+
+//分段控制器
+@property UISegmentedControl *segment;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -11,6 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface SearchViewController : UIViewController
+<UITextFieldDelegate, UISearchBarDelegate,   UIGestureRecognizerDelegate>
+@property UITextField *textField;
 
 @end
 

@@ -1,8 +1,8 @@
 //
-//  PersonalViewController.h
+//  MyRecommendViewController.h
 //  share
 //
-//  Created by 房彤 on 2020/7/21.
+//  Created by 房彤 on 2020/7/23.
 //  Copyright © 2020 房彤. All rights reserved.
 //
 
@@ -10,11 +10,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface PersonalViewController : UIViewController
+@interface MyRecommendViewController : UIViewController
 <UITableViewDelegate, UITableViewDataSource>
-
 @property UITableView *tableView;
-
 @end
 
 NS_ASSUME_NONNULL_END

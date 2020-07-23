@@ -24,6 +24,12 @@
     tabBarItem.selectedImage = [[UIImage imageNamed:@"passage2.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
      self.tabBarItem = tabBarItem;
     
+    //分段控制器
+    NSArray *arr = @[@"精选文章", @"热门文章", @"全部文章"];
+    self.segment = [[UISegmentedControl alloc] initWithItems:arr];
+    self.segment.frame = CGRectMake(0, 88, 414, 40);
+    [self.view addSubview:self.segment];
+    
     
 }
 
