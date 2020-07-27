@@ -14,6 +14,10 @@ NS_ASSUME_NONNULL_BEGIN
 <UITableViewDelegate, UITableViewDataSource>
 
 @property UITableView *tableView;
+//@property UIScrollView *scroll;
+//@property UIPageControl *pageControl;
+//@property CADisplayLink *link;
+
 @end
 
 NS_ASSUME_NONNULL_END

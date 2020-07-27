@@ -19,6 +19,12 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    //返回
+    UIBarButtonItem *leftBtn = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back.png" ] style:UIBarButtonItemStylePlain target:self action:@selector(pressBack)];
+    
+    self.navigationItem.leftBarButtonItem = leftBtn;
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    
     self.view.backgroundColor = [UIColor redColor];
     
     
@@ -38,6 +44,10 @@
     [self.view addSubview:self.tableView];
     
     
+}
+
+- (void)pressBack {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 

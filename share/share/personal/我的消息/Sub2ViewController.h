@@ -11,7 +11,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface Sub2ViewController : UIViewController
+<UITableViewDelegate, UITableViewDataSource>
 
+@property UITableView *tableView;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -36,7 +36,7 @@
     UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 100, 414, 35)];
     searchBar.placeholder = @"请输入用户名、作品分类、文章";
     searchBar.barStyle = UIBarStyleDefault;
-    searchBar.searchBarStyle = UISearchBarStyleMinimal;  //背景透明
+    //searchBar.searchBarStyle = UISearchBarStyleMinimal;  //背景透明
     searchBar.delegate = self;
        
     [self.view addSubview:searchBar];
@@ -272,9 +272,10 @@
 */
 // 点击键盘上的search按钮
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    if([searchBar.text isEqualToString: @"大白"]) {
     SubSearchViewController *ssVc = [[SubSearchViewController alloc] init];
     [self.navigationController pushViewController:ssVc animated:YES];
-    
+    }
 }
 -(void) pressSelect:(UIButton *)btn {
     btn.tintColor = [UIColor whiteColor];

@@ -117,6 +117,19 @@
         SettingViewController *setView = [[SettingViewController alloc]init];
         [self.navigationController pushViewController:setView animated:YES];
     }
+    
+    else if (indexPath.row == 4 || indexPath.row == 6){
+         //创建UIAlertController
+        //p1 弹框标题。  p2 弹框消息内容   p3弹框样式
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"无内容" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+         //添加按钮动作
+         UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+             NSLog(@"点击确定按钮");
+         }];
+         [alert addAction:action1];
+         [self presentViewController:alert animated:YES completion:nil];
+        
+    }
 }
 
 @end

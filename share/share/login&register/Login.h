@@ -19,6 +19,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property NSString *name;
 @property NSString *pass;
 
- @end
+@end
 
 NS_ASSUME_NONNULL_END

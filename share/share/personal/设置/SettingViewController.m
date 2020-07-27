@@ -21,6 +21,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    //返回
+    UIBarButtonItem *leftBtn = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back.png" ] style:UIBarButtonItemStylePlain target:self action:@selector(pressBack)];
+       
+    self.navigationItem.leftBarButtonItem = leftBtn;
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    
     self.tableView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -37,6 +44,10 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 50;
+}
+
+- (void)pressBack {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -58,8 +69,24 @@
     } else if(indexPath.row == 2) {
         Sub3SettingViewController *sub3 = [[Sub3SettingViewController alloc] init];
         [self.navigationController pushViewController:sub3 animated:YES];
+    } else if(indexPath.row == 3){
+        
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"无内容" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil];
+        [alert addAction:action];
+        [self presentViewController:alert animated:YES completion:nil];
+        
+    } else {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"缓存已清除" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+        [self presentViewController:alert animated:NO completion:nil];
+        [self performSelector:@selector(disAlert:) withObject:alert afterDelay:2];
     }
 }
 
+
+-(void)disAlert : (UIAlertController *) alert {
+    [alert dismissViewControllerAnimated:YES completion:nil];
+    
+}
 
 @end

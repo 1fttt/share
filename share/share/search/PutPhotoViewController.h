@@ -12,6 +12,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface PutPhotoViewController : UIViewController
 
+@property UIButton *selectPhoto;
+@property UILabel *address;
+@property UIImageView *addressView;
+@property UITextField *name;
+@property UITextField *content;
+@property UIButton *up;
+@property UIButton *banLoad;
+@property UILabel *ban;
+
 @end
 
 NS_ASSUME_NONNULL_END

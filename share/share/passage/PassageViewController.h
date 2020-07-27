@@ -11,6 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface PassageViewController : UIViewController
+<UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource>
 
 @property UITableView *jxTableView;
 @property UITableView *rmTableView;

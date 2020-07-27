@@ -21,11 +21,21 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    //返回
+    UIBarButtonItem *leftBtn = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back.png" ] style:UIBarButtonItemStylePlain target:self action:@selector(pressBack)];
+       
+    self.navigationItem.leftBarButtonItem = leftBtn;
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    
     self.tableView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.separatorStyle = UITableViewCellSelectionStyleNone;
     [self.view addSubview: self.tableView];
+}
+
+- (void)pressBack {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -72,7 +82,7 @@
         Sub2ViewController *sub2 = [[Sub2ViewController alloc] init];
         [self.navigationController pushViewController:sub2 animated:YES];
     } else {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:@"无内容" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"无内容" message:@"" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:nil];
         [alert addAction:sureAction];
         [self presentViewController:alert animated:NO completion:nil];

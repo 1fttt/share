@@ -9,6 +9,7 @@
 #import "HomeViewController.h"
 #import "HomeTableViewCell.h"
 #import "SubViewController.h"
+#import "ScrollTableViewCell.h"
 
 @interface HomeViewController ()
 
@@ -38,10 +39,40 @@
     
     //注册
     [self.tableView registerClass:[HomeTableViewCell class] forCellReuseIdentifier:@"ft"];
+    [self.tableView registerClass:[ScrollTableViewCell class] forCellReuseIdentifier:@"ff"];
     
     [self.view addSubview:self.tableView];
     
 
+/*
+    self.scroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 155)];
+    self.scroll.pagingEnabled = YES;
+    for( int i = 1; i <= 5; i++) {
+        NSString *name;
+        if(i == 5) {
+            name = @"imag1.jpg";
+        } else {
+            name = [NSString stringWithFormat:@"imag%d.jpg", i];
+        }
+        UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(i * self.view.frame.size.width, 0, self.view.frame.size.width, 168)];
+        image.image = [UIImage imageNamed:name];
+        [self.scroll addSubview:image];
+    }
+    
+    self.pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(self.view.frame.size.width/2 - 20, 120, 50, 50)];
+    self.pageControl.numberOfPages = 4;
+    self.pageControl.currentPage = 0;
+    self.pageControl.pageIndicatorTintColor = [UIColor grayColor];
+    self.pageControl.currentPageIndicatorTintColor = [UIColor orangeColor];
+    
+     
+     
+    [self.tableView addSubview:self.scroll];
+    [self.tableView addSubview:self.pageControl];
+    
+    
+    */
+    
 }
 
 //组数
@@ -83,11 +114,49 @@
 
 //单元格内容
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell0 = [[UITableViewCell alloc] init];
+  //  UITableViewCell *cell0 = [[UITableViewCell alloc] init];
     
-    HomeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ft" forIndexPath:indexPath];
+  //  HomeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ft" forIndexPath:indexPath];
+    
+    
+    if(indexPath.section == 0) {
+        ScrollTableViewCell *cell1 = [tableView dequeueReusableCellWithIdentifier:@"ff" forIndexPath:indexPath];
+        return cell1;
+    }
+    
+    /*
+    if(indexPath.section == 0) {
+        self.scroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 155)];
+        self.scroll.pagingEnabled = YES;
+        for( int i = 1; i <= 5; i++) {
+            NSString *name;
+            if(i == 5) {
+                name = @"imag1.jpg";
+            } else {
+                name = [NSString stringWithFormat:@"imag%d.jpg", i];
+            }
+            UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(i * self.view.frame.size.width, 0, self.view.frame.size.width, 168)];
+            image.image = [UIImage imageNamed:name];
+            [self.scroll addSubview:image];
+        }
+        
+        self.pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(self.view.frame.size.width/2 - 20, 120, 50, 50)];
+        self.pageControl.numberOfPages = 4;
+        self.pageControl.currentPage = 0;
+        self.pageControl.pageIndicatorTintColor = [UIColor grayColor];
+        self.pageControl.currentPageIndicatorTintColor = [UIColor orangeColor];
+        
+         
+         
+        [self.tableView addSubview:self.scroll];
+        [self.tableView addSubview:self.pageControl];
+    }
+    
+     
+     */
+    
    if(indexPath.section == 1) {
-    
+     HomeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ft" forIndexPath:indexPath];
         cell.photoView.image = [UIImage imageNamed:@"photo1.png"];
         cell.zanView.image = [UIImage imageNamed:@"zan.png"];
         cell.eyeView.image = [UIImage imageNamed:@"eye.png"];
@@ -113,6 +182,8 @@
         return cell;
    }  else if (indexPath.section == 2) {
 
+        HomeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ft" forIndexPath:indexPath];
+       
         cell.photoView.image = [UIImage imageNamed:@"photo2.png"];
         cell.zanView.image = [UIImage imageNamed:@"zan.png"];
         cell.eyeView.image = [UIImage imageNamed:@"eye.png"];
@@ -137,6 +208,9 @@
        
         return cell;
    } else if(indexPath.section == 3) {
+       
+        HomeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ft" forIndexPath:indexPath];
+       
         cell.photoView.image = [UIImage imageNamed:@"photo3.png"];
         cell.zanView.image = [UIImage imageNamed:@"zan.png"];
         cell.eyeView.image = [UIImage imageNamed:@"eye.png"];
@@ -160,7 +234,12 @@
         cell.shareLabel.font = [UIFont systemFontOfSize:13];
           
         return cell;
-   } else if(indexPath.section == 4){
+   } else
+       //(indexPath.section == 4);
+   {
+       
+        HomeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ft" forIndexPath:indexPath];
+       
         cell.photoView.image = [UIImage imageNamed:@"photo4.png"];
         cell.zanView.image = [UIImage imageNamed:@"zan.png"];
         cell.eyeView.image = [UIImage imageNamed:@"eye.png"];
@@ -185,12 +264,40 @@
           
         return cell;
    }
-   else {
-       return cell0;
-   }
+    
+ 
     
 }
 
+ 
+/*
+- (void)viewDidAppear:(BOOL)animated {
+    [self setUpLink];
+}
+
+- (void)setUpLink {
+    self.link = [CADisplayLink displayLinkWithTarget:self selector:@selector(slideImage)];
+}
+
+- (void)slideImage {
+    int page = self.scroll.contentOffset.x / self.view.frame.size.width;
+    if(page == 5) {
+        self.scroll.contentOffset = CGPointMake(self.view.frame.size.width, 0);
+        [self.scroll setContentOffset:CGPointMake(self.view.frame.size.width * 2, 0) animated:YES];
+        
+    } else {
+        [self.scroll setContentOffset:CGPointMake((page + 1) * self.view.frame.size.width, 0) animated:YES];
+    }
+    if(page == 4) {
+        self.pageControl.currentPage = 0;
+    } else if(page == 5) {
+        self.pageControl.currentPage = 1;
+    } else {
+        self.pageControl.currentPage = page;
+    }
+}
+ 
+ */
 
 
 

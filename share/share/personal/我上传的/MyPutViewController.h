@@ -11,6 +11,13 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface MyPutViewController : UIViewController
+<UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource>
+@property UITableView *tableView1;
+@property UITableView *tableView2;
+@property UITableView *tableView3;
+
+@property UIScrollView *scroll;
+@property UISegmentedControl *seg;
 
 @end
 

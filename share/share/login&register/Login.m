@@ -133,20 +133,24 @@
     [self.view addSubview:zdLabel];
 
     
-    
+    // 键盘出现 视图上移事件
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillAppear:) name:UIKeyboardWillShowNotification object:nil];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillDisAppear:) name:UIKeyboardWillHideNotification object:nil];
     
 }
 
+/*
 //点击屏幕空白处 调用此函数
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
   //辞掉第一响应者 使虚拟键盘回收，不再作为第一消息响应者
     [self.nameTextField resignFirstResponder];
     [self.passTextField resignFirstResponder];
 }
-
+*/
 - (void)pressLogin {
     
-   // if([self.nameTextField.text isEqualToString:self.name] && [self.passTextField.text isEqualToString:self.pass]) {
+    if([self.nameTextField.text isEqualToString:self.name] && [self.passTextField.text isEqualToString:self.pass]) {
     
     //视图控制器
     HomeViewController *homeVC = [[HomeViewController alloc] init];
@@ -211,10 +215,14 @@
   
     
     
-  //  } else {
-  //      self.nameTextField.text = @"";
-  //      self.passTextField.text = @"";
-  //  }
+    } else {
+        self.nameTextField.text = @"";
+        self.passTextField.text = @"";
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"账号或密码错误" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *action = [UIAlertAction actionWithTitle:@"重新输入" style:UIAlertActionStyleDefault handler:nil];
+        [alert addAction:action];
+        [self presentViewController:alert animated:YES completion:nil];
+    }
     
 }
 
@@ -225,9 +233,7 @@
     Register *registerView = [[Register alloc] init];
     
     registerView.delegate = self;
-   // registerView.userName = self.nameTextField.text;
-   // registerView.userPass = self.passTextField.text;
-    
+
     registerView.userName = self.name;
     registerView.userPass = self.pass;
     
@@ -249,5 +255,22 @@
 {
     zdBtn.selected = !zdBtn.selected;
 }
+
+// 键盘出现 视图上移事件
+- (void)keyboardWillDisAppear:(NSNotification *)notification{
+    [UIView animateWithDuration:1 animations:^{self.view.transform = CGAffineTransformMakeTranslation(0, 0);}];
+}
+
+- (void)keyboardWillAppear:(NSNotification *)notification{
+
+    [UIView animateWithDuration:1.0 animations:^{self.view.transform = CGAffineTransformMakeTranslation(0, - 40);}];
+}
+
+//点击空白处，收回键盘
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [self.view endEditing:YES];
+}
+
 
 @end

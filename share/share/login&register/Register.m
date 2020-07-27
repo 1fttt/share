@@ -84,23 +84,41 @@
     
     
     
-    
-    
-    
-    
-    
-    
+
+    // 键盘出现 视图上移事件
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillAppear:) name:UIKeyboardWillShowNotification object:nil];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillDisAppear:) name:UIKeyboardWillHideNotification object:nil];
     
 }
 
 
-//点击空白处调用此函数
+// 键盘出现 视图上移事件
+- (void)keyboardWillDisAppear:(NSNotification *)notification{
+    [UIView animateWithDuration:1 animations:^{self.view.transform = CGAffineTransformMakeTranslation(0, 0);}];
+}
+
+- (void)keyboardWillAppear:(NSNotification *)notification{
+
+    [UIView animateWithDuration:1.0 animations:^{self.view.transform = CGAffineTransformMakeTranslation(0, - 40);}];
+}
+
+//点击空白处，收回键盘
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [self.view endEditing:YES];
+}
+
+
+
+/*
+//点击空白处调用此函数 回收键盘
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [self.email resignFirstResponder];
     [self.name resignFirstResponder];
     [self.pass resignFirstResponder];
 }
-
+*/
 - (void)pressRegister:(UIButton *)registerBtn {
     //命令代理人执行协议方法
     [self.delegate passContent:self.name.text andPass:self.pass.text];
